@@ -12,7 +12,7 @@
 var moreFruits = function(fruits) {
   var results = [];
 
-  _.each(fruits, function(fruit, index, collection) {
+  _.each(fruits, function(fruit) {
     results.push(fruit);
   });
 
@@ -24,7 +24,7 @@ var moreFruits = function(fruits) {
 var multiplesOfFive = function(numbers) {
   var result = 0;
 
-  _.each(numbers, function(number, index, collection) {
+  _.each(numbers, function(number) {
     if (number % 5 === 0) {
       result += 1;
     }
@@ -43,17 +43,32 @@ var multiplesOfFive = function(numbers) {
 // use _.filter to return the fruits array with only the desired fruit.
 var onlyOneFruit = function(fruits, targetFruit) {
 
+  return _.filter(fruits, function(fruit) {
+    return fruit === targetFruit;
+  });
+
+
 };
+
+
+
 
 // use _.filter to return the fruits array with only fruits
 // starting with the letter 'P'.
 var startsWith = function(fruits, letter) {
 
+  return _.filter(fruits, function(fruit) {
+    return fruit[0] === letter;
+  });
+
+
 };
 
 // return a filtered array containing only cookie-type desserts.
 var cookiesOnly = function(desserts) {
-
+  return _.filter(desserts, function(dessert) {
+    return dessert.type === 'cookie';
+  });
 };
 
 /*
@@ -64,13 +79,25 @@ var cookiesOnly = function(desserts) {
 
 // return the total price of all products.
 var sumTotal = function(products) {
+  return _.reduce(products, function(total, item) {
+    return total + Number(item.price.replace('$', ''));
+  }, 0);
+
 
 };
 
 // return an object consisting of dessert types and how many of each.
 // exampleOutput: { dessertType: 3, dessertType2: 1 }
 var dessertCategories = function(desserts) {
-
+  return _.reduce(desserts, function(object, dessert) {
+    if (object[dessert.type] === undefined) {
+      object[dessert.type] = 1;
+      return object;
+    } else {
+      object[dessert.type]++;
+      return object;
+    }
+  }, {});
 };
 
 // given an array of movie data objects,return an array containing
