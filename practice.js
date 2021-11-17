@@ -104,13 +104,27 @@ var dessertCategories = function(desserts) {
 // movies that came out between 1990 and 2000.
 // TIP: use an array as your accumulator - don't push to an external array!
 var ninetiesKid = function(movies) {
-
+  return _.reduce(movies, function(ninetiesMovies, movie) {
+    if (movie.releaseYear >= 1990 && movie.releaseYear <= 2000) {
+      ninetiesMovies.push(movie.title);
+      return ninetiesMovies;
+    } else {
+      return ninetiesMovies;
+    }
+  }, []);
 };
 
 // return an boolean stating if there exists a movie with a shorter
 // runtime than your time limit.
 // timeLimit is an integer representing a number of minutes.
 var movieNight = function(movies, timeLimit) {
+  return _.reduce(movies, function(shorterMovie, movie) {
+    if (shorterMovie) {
+      return true;
+    } else {
+      return movie.runtime < timeLimit;
+    }
+  }, false);
 
 };
 
