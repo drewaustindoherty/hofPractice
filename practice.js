@@ -149,14 +149,12 @@ var glutenFree = function(desserts) {
   var noGluten = _.map(desserts, function(dessert) {
     if (dessert.ingredients.indexOf('flour') === -1) {
       dessert.glutenFree = false;
-      return dessert;
     } else {
       dessert.glutenFree = true;
-      return dessert;
     }
 
   });
-  return noGluten;
+  return desserts;
 };
 
 // use _.map to return an array of items with their sale prices, with a new property
@@ -180,9 +178,9 @@ var glutenFree = function(desserts) {
 
 */
 var applyCoupon = function(groceries, coupon) {
-  return _.map(groceries, function(item) {
-    item.salePrice = Number((item.price * (1 - coupon)).toFixed(2));
-    return item;
+  var couponApplied = _.map(groceries, function(item) {
+    item.salePrice = '$' + Math.round(Number(item.price.replace('$', ''))
+     * 100 * (1 - coupon)) / 100;
   });
-
+  return groceries;
 };
